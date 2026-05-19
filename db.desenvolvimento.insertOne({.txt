@@ -1,0 +1,109 @@
+db.desenvolvimento.insertOne({
+nome: "Maria",
+idade: 30,
+nível: 1
+
+});
+
+
+
+db.desenvolvimento.insertMany(
+[{
+nome: "José",
+idade: 25,
+nível: 2
+
+},
+{
+nome: "Rodrigo",
+idade: 28,
+nível: 1
+
+},
+{
+nome: "Miguel",
+idade: 20,
+nível: 4
+
+}]
+);
+
+
+
+db.desenvolvimento.updateOne(
+  { nome: "José" },
+  { $set: { idade: 31 } }
+);
+
+
+db.desenvolvimento.updateMany(
+  { nivel: {$lt: 4} },
+  { $inc: { nivel: 1 } }
+);
+
+db.desenvolvimento.updateMany(
+|   { nível: { $lt: 4 } },
+|   { $inc: { nível: 1 } }
+| );
+
+db.desenvolvimento.updateOne(
+{nome: "Miguel"},
+{$push: {interesses: "MongoDB"}}
+);
+
+db.desenvolvimento.updateOne(
+	{nome: "Maria"},
+{$push: {interesses: {$each: ["Node.js", "Java", "React"]}}}
+);
+
+
+db.desenvolvimento.updateOne(
+	{nome: "Rodrigo"},
+{$push: {interesses: {$each: ["Pussy.js", "Tai", "Clean"]}}}
+);
+
+db.desenvolvimento.updateOne(
+	{nome: "Maria"},
+{$pop: {interesses: -1}}
+);PROVA
+
+
+db.desenvolvimento.updateOne(
+	{nome: "Maria"},
+{$pull: {interesses: "MongoDB"}}
+);não remove pq não tinha
+
+db.desenvolvimento.updateOne(
+	{nome: "Maria"},
+{$pull: {interesses: "React"}}
+);
+
+db.desenvolvimento.find();
+
+
+
+
+const documento_0 = db.desenvolvimento.findOne(
+{nome: "Miguel"});
+
+const documento_1 = db.desenvolvimento.findOne(
+{nome: "Maria"});
+
+const documento_2 = db.desenvolvimento.findOne(
+{nome: "José"});
+
+const documento_3 = db.desenvolvimento.findOne(
+{nome: "Rodrigo"});
+
+print(documento)
+
+
+
+
+const resultado = db.desenvolvimento.aggregate([
+{
+$group:{
+_id: null,
+mediaIdade: {$avg: "$idade"}}}]).toArray();
+
+print("Média de idades: ", resultado[0].mediaIdade)
